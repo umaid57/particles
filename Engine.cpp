@@ -7,19 +7,54 @@ Engine::Engine()
 
 void Engine::input()
 {
+	Event event;
+	while (m_Window.pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed) m_Window.close();
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			m_Window.close();
+		}
+		if (event.mouseButton.button == sf::Mouse::Left)
+		{
+			for (int i = 0; i < 5; i++) {
+				//(RAND()*(Max-Min)+Min)
+				int numPoints = rand() * (50 - 25) + 25;
+				Particle particle(m_Window, numPoints, Vector2i(event.mouseButton.x, event.mouseButton.y));
+				m_particles.push_back(particle);
+			}
+		}
 
-
+	}
 }
 
 void Engine::update(float dtAsSeconds)
 {
+	for (auto& particle = m_particles.begin(); particle != m_particles.end();) {
+		
+		if (particle->getTTL() > 0.0) {
+			
+			particle->update(dtAsSeconds);
+			particle++;
+		
+		}
+		else {
+			
+			particle = m_particles.erase(particle);
+		
+		}
+
+	}
 }
 
 void Engine::draw()
 {
+	m_Window.clear();
+	for (auto particle : m_particles) {
+		m_Window.draw(particle);
+	}
+	m_Window.display();
 }
-
-
 
 void Engine::run()
 {
