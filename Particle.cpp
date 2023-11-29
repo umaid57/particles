@@ -201,8 +201,7 @@ void Particle::unitTests()
 			j), initialCoords(0, j)))
 		{
 			cout << "Failed mapping: ";
-			cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")
-				==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << endl;
+			cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ") ==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << endl;
 				rotationPassed = false;
 		}
 	}
@@ -225,8 +224,7 @@ void Particle::unitTests()
 			almostEqual(m_A(1, j), 0.5 * initialCoords(1, j)))
 		{
 			cout << "Failed mapping: ";
-			cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")
-				==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << endl;
+			cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << endl;
 				scalePassed = false;
 		}
 	}
@@ -249,8 +247,7 @@ void Particle::unitTests()
 			almostEqual(m_A(1, j), 5 + initialCoords(1, j)))
 		{
 			cout << "Failed mapping: ";
-			cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")
-				==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << endl;
+			cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ")==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << endl;
 				translatePassed = false;
 		}
 	}
