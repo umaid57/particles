@@ -46,4 +46,3 @@ private:
     void translate(double xShift, double yShift);
 };
 
-Vector2f mapPixelToCoords(Vector2i mousePixel);
