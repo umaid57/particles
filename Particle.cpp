@@ -26,14 +26,14 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	m_color1 = sf::Color::White;
 	m_color2 = sf::Color::Color(rand() % 256, 0, rand() % 256);
 	
-	//initilize the angle of the vertices to a random number and the delta to the amount of rotation from each vertex
+	//initialize the angle of the vertices to a random number and the delta to the amount of rotation from each vertex
 	float theta = fmod(rand(), (M_PI / 2));
 	float dtheta = 2 * M_PI / (numPoints - 1);
 
 	//add the number of vertices to the matrix
 	for (int j = 0; j < numPoints; j++) {
 		float dx, dy;
-		int r = rand() * (80 - 20) + 20;
+		float r = rand() * (80 - 20) + 20;
 		
 		dx = r * cos(theta);
 		dy = r * sin(theta);
@@ -73,6 +73,7 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
 
 void Particle::rotate(double theta)
 {
+	
 	Vector2f temp = m_centerCoordinate;
 	translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
 
@@ -80,7 +81,7 @@ void Particle::rotate(double theta)
 	m_A = R * m_A;
 	
 	translate(temp.x, temp.y);
-
+	
 }
 
 void Particle::scale(double c)
@@ -96,18 +97,13 @@ void Particle::scale(double c)
 
 void Particle::translate(double xShift, double yShift)
 {
-	TranslationMatrix T(xShift, yShift, 2);
+	TranslationMatrix T(xShift, yShift, m_A.getCols());
 	m_A = T + m_A;
 
 	m_centerCoordinate.x += xShift;
 	m_centerCoordinate.y += yShift;
 
 }
-
-
-
-
-
 
 void Particle::update(float dt)
 {
@@ -123,6 +119,9 @@ void Particle::update(float dt)
 
 	translate(dx, dy);
 }
+
+
+
 
 bool Particle::almostEqual(double a, double b, double eps)
 {

@@ -17,7 +17,8 @@ void Engine::input()
 		}
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 5; i++) 
+			{
 				//(RAND()*(Max-Min)+Min)
 				int numPoints = rand() * (50 - 25) + 25;
 				Particle particle(m_Window, numPoints, Vector2i(event.mouseButton.x, event.mouseButton.y));
@@ -30,7 +31,7 @@ void Engine::input()
 
 void Engine::update(float dtAsSeconds)
 {
-	for (auto& particle = m_particles.begin(); particle != m_particles.end();) {
+	for (auto particle = m_particles.begin(); particle != m_particles.end();) {
 		
 		if (particle->getTTL() > 0.0) {
 			
@@ -50,7 +51,7 @@ void Engine::update(float dtAsSeconds)
 void Engine::draw()
 {
 	m_Window.clear();
-	for (auto particle : m_particles) {
+	for (auto& particle : m_particles) {
 		m_Window.draw(particle);
 	}
 	m_Window.display();
@@ -59,6 +60,11 @@ void Engine::draw()
 void Engine::run()
 {
 	sf::Clock clock;
+	
+	cout << "Starting Particle unit tests..." << endl;
+	Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
+	p.unitTests();
+	cout << "Unit tests complete.  Starting engine..." << endl;
 
 	while (m_Window.isOpen()) {
 		
