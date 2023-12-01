@@ -88,13 +88,12 @@ void Engine::run()
 		frames++;
 		float dt = elapsed1.asSeconds();
 
-		// Update FPS every second
 		if (frames % updateFrequency == 0) {
 			 float fps = frames/ elapsed.asSeconds();
 			 
 			 text.setString("FPS: " + to_string((int)fps));
 
-			// Reset counters
+
 			elapsed = sf::Time::Zero;
 			frames = 0;
 		}
