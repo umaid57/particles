@@ -7,10 +7,10 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	m_numPoints = numPoints;
 
 	//generate random number between [0:PI]
-	m_radiansPerSec = ((float)rand() / RAND_MAX) * M_PI;
+	m_radiansPerSec = ((float)rand() / (RAND_MAX)) * M_PI;
 
 	//set the center of and resize the View object cartesianPlane to the size of the screen and invert the y axis
-	m_cartesianPlane.setCenter(0, 0);
+	m_cartesianPlane.setCenter(0,0);
 	m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
 	
 	//use RenderTarget member Vector2f mapPixelToCoords (const Vector2i &point, const View &view) const
@@ -18,22 +18,22 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
 	
 	//random velocity for the vertices
-	m_vy = rand() * (500 - 100) + 100;
-	m_vx = rand() * (500 - 100) + 100;
+	m_vy = rand() % (500 - 100 + 1) + 100;
+	m_vx = rand() % (500 - 100 + 1) + 100;
 	if (rand() % 2 == 1) m_vx *= -1;
 	
 	//center color is white and outside color is random
 	m_color1 = sf::Color::White;
-	m_color2 = sf::Color::Color(rand() % 256, 0, rand() % 256);
+	m_color2 = sf::Color::Color(rand() % 256, rand() % 256, rand() % 256);
 	
 	//initialize the angle of the vertices to a random number and the delta to the amount of rotation from each vertex
-	float theta = fmod(rand(), (M_PI / 2));
-	float dtheta = 2 * M_PI / (numPoints - 1);
+	float theta = fmod(static_cast<float>(rand()) / RAND_MAX, M_PI / 2);
+	float dtheta = static_cast<float>(2 * M_PI) / (numPoints - 1);
 
 	//add the number of vertices to the matrix
 	for (int j = 0; j < numPoints; j++) {
 		float dx, dy;
-		float r = rand() * (80 - 20) + 20;
+		float r = static_cast<float>(rand() % (80 - 20 + 1)) + 20;
 		
 		dx = r * cos(theta);
 		dy = r * sin(theta);
