@@ -1,4 +1,4 @@
-#include "particle.h"
+#include "Particle.h"
 //call the default constructor for Matrix m_A in the initilization list
 Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) : m_A(2, numPoints)
 {
