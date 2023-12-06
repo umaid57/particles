@@ -7,7 +7,7 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	m_numPoints = numPoints;
 
 	//generate random number between [0:PI]
-	m_radiansPerSec = ((float)rand() / (RAND_MAX)) * M_PI;
+	m_radiansPerSec = ((float)rand() / (RAND_MAX)) * MEMBER_PI;
 
 	//set the center of and resize the View object cartesianPlane to the size of the screen and invert the y axis
 	m_cartesianPlane.setCenter(0,0);
@@ -27,8 +27,8 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	m_color2 = sf::Color::Color(rand() % 256, rand() % 256, rand() % 256);
 	
 	//initialize the angle of the vertices to a random number and the delta to the amount of rotation from each vertex
-	float theta = fmod(static_cast<float>(rand()) / RAND_MAX, M_PI / 2);
-	float dtheta = static_cast<float>(2 * M_PI) / (numPoints - 1);
+	float theta = fmod(static_cast<float>(rand()) / RAND_MAX, MEMBER_PI / 2);
+	float dtheta = static_cast<float>(2 * MEMBER_PI) / (numPoints - 1);
 
 	//add the number of vertices to the matrix
 	for (int j = 0; j < numPoints; j++) {
@@ -132,8 +132,8 @@ void Particle::unitTests()
 {
 	int score = 0;
 	cout << "Testing RotationMatrix constructor...";
-	double theta = M_PI / 4.0;
-	RotationMatrix r(M_PI / 4);
+	double theta = MEMBER_PI / 4.0;
+	RotationMatrix r(MEMBER_PI / 4);
 	if (r.getRows() == 2 && r.getCols() == 2 && almostEqual(r(0, 0), cos(theta))
 		&& almostEqual(r(0, 1), -sin(theta))
 		&& almostEqual(r(1, 0), sin(theta))
@@ -192,7 +192,7 @@ void Particle::unitTests()
 	}
 	cout << "Applying one rotation of 90 degrees about the origin..." << endl;
 	Matrix initialCoords = m_A;
-	rotate(M_PI / 2.0);
+	rotate(MEMBER_PI / 2.0);
 	bool rotationPassed = true;
 	for (int j = 0; j < initialCoords.getCols(); j++)
 	{

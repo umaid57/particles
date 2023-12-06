@@ -93,7 +93,6 @@ void Engine::run()
 			 
 			 text.setString("FPS: " + to_string((int)fps));
 
-
 			elapsed = sf::Time::Zero;
 			frames = 0;
 		}
