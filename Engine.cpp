@@ -16,23 +16,25 @@ void Engine::input()
 		{
 			m_Window.close();
 		}
-		if (event.mouseButton.button == sf::Mouse::Left)
+		if (event.type == sf::Event::MouseButtonPressed)
 		{
-			for (int i = 0; i < 5; i++) 
+			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				//(RAND()*(Max-Min + 1)+Min)
-				int numPoints = rand() % (50 - 25 + 1) + 25;
-				Particle particle(m_Window, numPoints, Vector2i(event.mouseButton.x, event.mouseButton.y));
-				m_particles.push_back(particle);
+				for (int i = 0; i < 5; i++)
+				{
+					//(RAND()*(Max-Min + 1)+Min)
+					int numPoints = rand() % (50 - 25 + 1) + 25;
+					Particle particle(m_Window, numPoints, Vector2i(event.mouseButton.x, event.mouseButton.y));
+					m_particles.push_back(particle);
+				}
 			}
 		}
-
 	}
 }
 
 void Engine::update(float dtAsSeconds)
 {
-	for (auto particle = m_particles.begin(); particle != m_particles.end();) {
+	for (auto particle = m_particles.begin(); particle != m_particles.end(); ) {
 		
 		if (particle->getTTL() > 0.0) {
 			
