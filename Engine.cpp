@@ -81,19 +81,17 @@ void Engine::run()
 	
 	sf::Clock clock;
 	int frames = 0;
-	const  int updateFrequency = 30;
 	sf::Time elapsed = sf::Time::Zero;
 	
 	while (m_Window.isOpen()) {
-		sf::Time elapsed1 = clock.restart();
-		elapsed += elapsed1;
+		sf::Time frameTime = clock.restart();
+		elapsed += frameTime;
 		frames++;
-		float dt = elapsed1.asSeconds();
+		float dt = frameTime.asSeconds();
 
-		if (frames % updateFrequency == 0) {
-			 float fps = frames/ elapsed.asSeconds();
-			 
-			 text.setString("FPS: " + to_string((int)fps));
+		if (elapsed >= sf::seconds(1.0f)) {
+			float fps = frames / elapsed.asSeconds();
+			text.setString("FPS: " + to_string((int)fps));
 
 			elapsed = sf::Time::Zero;
 			frames = 0;
